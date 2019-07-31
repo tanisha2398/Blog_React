@@ -14,8 +14,8 @@ export default () => {
       filters: filterReducer,
       auth: authReducer
     }),
-    // composeEnhancer(applyMiddleware(thunk))
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    composeEnhancer(applyMiddleware(thunk))
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
   return store;
 };

@@ -6,7 +6,7 @@ export const BlogEditPage = props => {
   console.log(props);
   return (
     <div>
-      Blog Edit page content with id {props.match.params.id}
+      blog Edit page content with id {props.match.params.id}
       <BlogForm
         blog={props.blog}
         onSubmit={blog => {
