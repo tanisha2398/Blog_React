@@ -28,6 +28,17 @@ export const removeBlog = ({ id } = {}) => ({
   id
 });
 
+export const startRemoveBlog = ({ id } = {}) => {
+  return dispatch => {
+    database
+      .ref(`blogs/${id}`)
+      .remove()
+      .then(() => {
+        dispatch(removeBlog({ id }));
+      });
+  };
+};
+
 export const editBlog = (id, updates) => ({
   type: "EDIT_BLOG",
   id,

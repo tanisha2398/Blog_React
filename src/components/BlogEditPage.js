@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import BlogForm from "./BlogForm";
-import { editBlog, removeBlog } from "../actions/blogs";
+import { editBlog, startRemoveBlog } from "../actions/blogs";
 export const BlogEditPage = props => {
   console.log(props);
   return (
@@ -16,7 +16,7 @@ export const BlogEditPage = props => {
       />
       <button
         onClick={() => {
-          props.dispatch(removeBlog({ id: props.blog.id }));
+          props.dispatch(startRemoveBlog({ id: props.blog.id }));
           props.history.push("/dashboard");
         }}
       >
