@@ -33,3 +33,26 @@ export const editBlog = (id, updates) => ({
   id,
   updates
 });
+
+export const setBlogs = blogs => ({
+  type: "SET_BLOGS",
+  blogs
+});
+
+export const startSetBlogs = () => {
+  return dispatch => {
+    return database
+      .ref("blogs")
+      .once("value")
+      .then(snapshot => {
+        const blogs = [];
+        snapshot.forEach(childSnapshot => {
+          blogs.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val()
+          });
+        });
+        dispatch(setBlogs(blogs));
+      });
+  };
+};

@@ -6,7 +6,7 @@ import AppRouter, { history } from "./routers/AppRouter";
 import configureStore from "./store/configureStore";
 import LoadingPage from "./components/LoadingPage";
 import { login, logout } from "./actions/auth";
-import { addBlog } from "./actions/blogs";
+import { startSetBlogs } from "./actions/blogs";
 import { setTextFilter } from "./actions/filters";
 import getVisibleBlog from "./selectors/blogs";
 import "normalize.css/normalize.css";
@@ -16,10 +16,10 @@ import { firebase } from "./firebase/firebase";
 
 const store = configureStore();
 
-store.dispatch(addBlog({ title: "mat", body: "i love to do exercise on mat" }));
-store.dispatch(
-  addBlog({ title: "bat", body: "i love to play cricket", createdAt: 12334 })
-);
+// store.dispatch(addBlog({ title: "mat", body: "i love to do exercise on mat" }));
+// store.dispatch(
+//   addBlog({ title: "bat", body: "i love to play cricket", createdAt: 12334 })
+// );
 
 const state = store.getState();
 const visibleBlog = getVisibleBlog(state.blogs, state.filters);
@@ -30,7 +30,11 @@ const jsx = (
     <AppRouter />
   </Provider>
 );
-ReactDOM.render(jsx, document.getElementById("app"));
+ReactDOM.render(<LoadingPage />, document.getElementById("app"));
+store.dispatch(startSetBlogs()).then(() => {
+  ReactDOM.render(jsx, document.getElementById("app"));
+});
+
 // let hasRendered = false;
 // const renderApp = () => {
 //   if (!hasRendered) {
