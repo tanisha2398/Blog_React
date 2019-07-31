@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import BlogForm from "./BlogForm";
-import { addBlog } from "../actions/blogs";
+import { startAddBlog } from "../actions/blogs";
 export const BlogAddPage = props => (
   <div>
     add blog
     <BlogForm
       onSubmit={blog => {
-        props.dispatch(addBlog(blog));
+        props.dispatch(startAddBlog(blog));
         props.history.push("/dashboard");
       }}
     />
