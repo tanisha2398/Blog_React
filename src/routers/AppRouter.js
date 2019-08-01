@@ -8,7 +8,7 @@ import BlogAddPage from "../components/BlogAddPage";
 import BlogReadPage from "../components/BlogReadPage";
 import BlogEditPage from "../components/BlogEditPage";
 import {
-  BrowserRouter,
+ 
   Router,
   Route,
   Switch,
@@ -19,7 +19,7 @@ import LoginPage from "../components/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 
-// export const history = createHistory();
+export const history = createHistory();
 
 // const AppRouter = () => (
 //   <Router history={history}>
@@ -39,18 +39,19 @@ import PublicRoute from "./PublicRoute";
 // export default AppRouter;
 
 const AppRouter = () => (
-  <BrowserRouter>
+  <Router history={history}>
     <div>
       <Header />
       <Switch>
-        <Route path="/dashboard" component={DashboardPage} exact={true} />
+        <Route path="/" component={LoginPage} exact={true} />
+        <Route path="/dashboard" component={DashboardPage} />
         <Route path="/create" component={BlogAddPage} />
         <Route path="/edit/:id" component={BlogEditPage} />
         <Route path="/read/:id" component={BlogReadPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
-  </BrowserRouter>
+  </Router>
 );
 
 export default AppRouter;
