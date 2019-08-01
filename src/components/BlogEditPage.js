@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import BlogForm from "./BlogForm";
 import { startEditBlog, startRemoveBlog } from "../actions/blogs";
 export const BlogEditPage = props => {
@@ -7,6 +8,7 @@ export const BlogEditPage = props => {
   return (
     <div>
       Blog Edit page content with id {props.match.params.id}
+      <Link to={`/read/${props.match.params.id}`}>Read</Link>
       <BlogForm
         blog={props.blog}
         onSubmit={blog => {

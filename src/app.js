@@ -7,7 +7,6 @@ import configureStore from "./store/configureStore";
 import LoadingPage from "./components/LoadingPage";
 import { login, logout } from "./actions/auth";
 import { startSetBlogs } from "./actions/blogs";
-import { setTextFilter } from "./actions/filters";
 import getVisibleBlog from "./selectors/blogs";
 import "normalize.css/normalize.css";
 import "./styles/styles.scss";
@@ -40,23 +39,19 @@ const renderApp = () => {
   }
 };
 
-
-
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
+    store.dispatch(login(user.uid));
     store.dispatch(startSetBlogs()).then(() => {
       renderApp();
       if (history.location.pathname === "/") {
-    history.push("/dashboard");
-    }
+        history.push("/dashboard");
+      }
     });
-   
-    // store.dispatch(login(user.uid));
 
-    
-    
+    //
   } else {
-    // store.dispatch(logout());
+    store.dispatch(logout());
     renderApp();
 
     history.push("/");
