@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
+import moment from 'moment';
 export const BlogReadPage = props => {
   console.log(props);
   return (
     <div>
       <h1>{props.blog.title}</h1>
-      <p>{props.blog.createdAt}</p>
+      <p>{moment(props.blog.createdAt).format('MMMM Do, YYYY')}</p>
       <p>{props.blog.body}</p>
     </div>
   );

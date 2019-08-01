@@ -7,14 +7,7 @@ import NotFoundPage from "../components/NotFoundPage";
 import BlogAddPage from "../components/BlogAddPage";
 import BlogReadPage from "../components/BlogReadPage";
 import BlogEditPage from "../components/BlogEditPage";
-import {
- 
-  Router,
-  Route,
-  Switch,
-  Link,
-  NavLink
-} from "react-router-dom";
+import { Router, Route, Switch, Link, NavLink } from "react-router-dom";
 import LoginPage from "../components/LoginPage";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
@@ -41,13 +34,12 @@ export const history = createHistory();
 const AppRouter = () => (
   <Router history={history}>
     <div>
-      <Header />
       <Switch>
-        <Route path="/" component={LoginPage} exact={true} />
-        <Route path="/dashboard" component={DashboardPage} />
-        <Route path="/create" component={BlogAddPage} />
-        <Route path="/edit/:id" component={BlogEditPage} />
-        <Route path="/read/:id" component={BlogReadPage} />
+        <PublicRoute path="/" component={LoginPage} exact={true} />
+        <PrivateRoute path="/dashboard" component={DashboardPage} />
+        <PrivateRoute path="/create" component={BlogAddPage} />
+        <PrivateRoute path="/edit/:id" component={BlogEditPage} />
+        <PrivateRoute path="/read/:id" component={BlogReadPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

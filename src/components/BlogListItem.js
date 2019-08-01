@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 import { Link } from "react-router-dom";
 
@@ -9,7 +10,7 @@ const BlogListItem = ({ id, createdAt, title, body }) => (
     </Link>
 
     <p>{body}</p>
-    <p>{createdAt}</p>
+    <p>{moment(createdAt).format('MMMM Do, YYYY')}</p>
   </div>
 );
 

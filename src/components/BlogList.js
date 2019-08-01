@@ -4,9 +4,11 @@ import BlogListItem from "./BlogListItem";
 import selectBlog from "../selectors/blogs";
 const BlogList = props => (
   <div>
-    {props.blogs.map(blog => {
-      return <BlogListItem key={blog.id} {...blog} />;
-    })}
+    {props.blogs.length === 0 ? (
+      <span>No Blogs</span>
+    ) : (
+      props.blogs.map(blog => <BlogListItem key={blog.id} {...blog} />)
+    )}
   </div>
 );
 
