@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import BlogForm from "./BlogForm";
-import { editBlog, startRemoveBlog } from "../actions/blogs";
+import { startEditBlog, startRemoveBlog } from "../actions/blogs";
 export const BlogEditPage = props => {
   console.log(props);
   return (
@@ -10,7 +10,7 @@ export const BlogEditPage = props => {
       <BlogForm
         blog={props.blog}
         onSubmit={blog => {
-          props.dispatch(editBlog(props.blog.id, blog));
+          props.dispatch(startEditBlog(props.blog.id, blog));
           props.history.push("/dashboard");
         }}
       />
