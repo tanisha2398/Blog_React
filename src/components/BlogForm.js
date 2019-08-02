@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import { storage } from "../firebase/firebase";
 import { SingleDatePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
 import "react-dates/initialize";
@@ -13,7 +14,8 @@ export default class BlogForm extends React.Component {
       title: props.blog ? props.blog.title : "",
       body: props.blog ? props.blog.body : "",
       createdAt: props.blog ? moment(props.blog.createdAt) : moment(),
-      calendarFocused: false,
+      imgUrl: props.blog ? props.blog.imgUrl : "",
+      url: props.blog ? props.blog.url : "",
       error: ""
     };
   }
@@ -28,13 +30,11 @@ export default class BlogForm extends React.Component {
       title
     }));
   };
-  onDateChange = createdAt => {
-    if (createdAt) {
-      this.setState(() => ({ createdAt }));
-    }
-  };
-  onFocusChange = ({ focused }) => {
-    this.setState(() => ({ calendarFocused: focused }));
+  fileSelectedHandler = e => {
+    const imgUrl = e.target.files[0];
+    this.setState(() => ({
+      imgUrl
+    }));
   };
   onSubmit = e => {
     e.preventDefault();
@@ -44,10 +44,31 @@ export default class BlogForm extends React.Component {
       }));
     } else {
       this.setState(() => ({ error: "" }));
+      const { imgUrl } = this.state;
+      const uploadTask = storage.ref(`images/${imgUrl.name}`).put(imgUrl);
+      uploadTask.on(
+        "state_changed",
+        snapshot => {},
+        error => {
+          console.log(error);
+        },
+        () => {
+          storage
+            .ref("images")
+            .child(imgUrl.name)
+            .getDownloadURL()
+            .then(url => {
+              console.log(url);
+              this.setState(() => ({ url: url }));
+            });
+        }
+      );
       this.props.onSubmit({
         title: this.state.title,
         body: this.state.body,
-        createdAt: this.state.createdAt.valueOf()
+        createdAt: this.state.createdAt.valueOf(),
+        imgUrl: this.state.imgUrl,
+        url: this.state.url
       });
     }
   };
@@ -63,19 +84,13 @@ export default class BlogForm extends React.Component {
             value={this.state.title}
             onChange={this.onTitleChange}
           />
-          <SingleDatePicker
-            date={this.state.createdAt}
-            onDateChange={this.onDateChange}
-            focused={this.state.calendarFocused}
-            onFocusChange={this.onFocusChange}
-            numberOfMonths={1}
-            isOutsideRange={() => false}
-          />
+          <input type="file" onChange={this.fileSelectedHandler} />
           <textarea
             placeholder="Blog Body"
             value={this.state.body}
             onChange={this.onBodyChange}
           />
+
           <button>Add Blog</button>
         </form>
       </div>

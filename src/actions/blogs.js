@@ -8,8 +8,14 @@ export const addBlog = blog => ({
 export const startAddBlog = (blogData = {}) => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
-    const { title = "", body = "", createdAt = 0 } = blogData;
-    const blog = { title, body, createdAt };
+    const {
+      title = "",
+      body = "",
+      createdAt = new Date(),
+      imgUrl = "",
+      url = ""
+    } = blogData;
+    const blog = { title, body, createdAt, imgUrl, url };
     database
       .ref(`users/${uid}/blogs`)
       .push(blog)
