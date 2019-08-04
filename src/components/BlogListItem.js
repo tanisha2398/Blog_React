@@ -11,7 +11,7 @@ const BlogListItem = ({ id, createdAt, title, body, url }) => (
 
     <p>{body}</p>
     <p>{moment(createdAt).format("MMMM Do, YYYY")}</p>
-    {url}
+    {url && <img src={url} alt="Uploaded image" height="300" width="400" />}
   </div>
 );
 

@@ -16,6 +16,7 @@ export default class BlogForm extends React.Component {
       createdAt: props.blog ? moment(props.blog.createdAt) : moment(),
       imgUrl: props.blog ? props.blog.imgUrl : "",
       url: props.blog ? props.blog.url : "",
+      progress:0,
       error: ""
     };
     this.fileSelectedHandler=this.fileSelectedHandler.bind(this);
@@ -80,8 +81,9 @@ export default class BlogForm extends React.Component {
     uploadTask.on(
       "state_changed",
       snapshot => {
-        let percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log(percent + "% done");
+        let progress =Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        console.log(progress + "% done");
+        this.setState({progress})
       },
       error => {
         console.log(error);
@@ -128,8 +130,12 @@ export default class BlogForm extends React.Component {
     return (
       <div>
         {this.state.error && <p>{this.state.error}</p>}
+        <progress value={this.state.progress} max="100"/>
+        <br/>
         <input type="file" onChange={this.fileSelectedHandler} />
           <button onClick={this.handleUpload}>Upload</button>
+          <br/>
+          <img src={this.state.url || 'https://via.placeholder.com/400x300'} alt="Uploaded image" height="300" width="400"/>
         <form onSubmit={this.onSubmit}>
           <input
             type="text"
