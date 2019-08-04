@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import { storage } from "../firebase/firebase";
+import { storage, database } from "../firebase/firebase";
 import { SingleDatePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
 import "react-dates/initialize";
@@ -18,8 +18,46 @@ export default class BlogForm extends React.Component {
       url: props.blog ? props.blog.url : "",
       error: ""
     };
+    this.fileSelectedHandler=this.fileSelectedHandler.bind(this);
+    this.handleUpload=this.handleUpload.bind(this);
   }
 
+  async uploadTaskFunc(uploadTask, imgUrl) {
+    await uploadTask.on(
+      "state_changed",
+      snapshot => {
+        let percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log(percent + "% done");
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        // this.getUrlFromStorage(imgUrl);
+        this.getUrlFromStorage(imgUrl);
+      }
+    );
+  }
+
+  async getUrlFromStorage(folder) {
+    await storage
+      .ref("images")
+      .child(folder.name)
+      .getDownloadURL()
+      .then(url => {
+        this.setState(() => ({ url }));
+      
+      
+        // database.ref("users").push(url);
+      });
+  }
+  async percentage(a) {
+    const percent = await ((a.bytesTransferred / a.totalBytes) * 100);
+    return percent;
+  }
+  // async storeUrlInDatabase(url) {
+  //   await database.ref(`users/${uid}/blogs`).push(url);
+  // }
   onBodyChange = e => {
     const body = e.target.value;
     this.setState(() => ({ body }));
@@ -36,6 +74,34 @@ export default class BlogForm extends React.Component {
       imgUrl
     }));
   };
+  handleUpload=()=>{
+    const {imgUrl}=this.state;
+    const uploadTask = storage.ref(`images/${imgUrl.name}`).put(imgUrl);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        let percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log(percent + "% done");
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        storage
+      .ref("images")
+      .child(imgUrl.name)
+      .getDownloadURL()
+      .then(url => {
+        console.log(url);
+        this.setState(() => ({ url }));
+      
+      
+        
+      });
+      }
+    );
+
+  }
   onSubmit = e => {
     e.preventDefault();
     if (!this.state.title || !this.state.body) {
@@ -44,25 +110,11 @@ export default class BlogForm extends React.Component {
       }));
     } else {
       this.setState(() => ({ error: "" }));
-      const { imgUrl } = this.state;
-      const uploadTask = storage.ref(`images/${imgUrl.name}`).put(imgUrl);
-      uploadTask.on(
-        "state_changed",
-        snapshot => {},
-        error => {
-          console.log(error);
-        },
-        () => {
-          storage
-            .ref("images")
-            .child(imgUrl.name)
-            .getDownloadURL()
-            .then(url => {
-              console.log(url);
-              this.setState(() => ({ url: url }));
-            });
-        }
-      );
+      
+     
+
+      
+
       this.props.onSubmit({
         title: this.state.title,
         body: this.state.body,
@@ -76,6 +128,8 @@ export default class BlogForm extends React.Component {
     return (
       <div>
         {this.state.error && <p>{this.state.error}</p>}
+        <input type="file" onChange={this.fileSelectedHandler} />
+          <button onClick={this.handleUpload}>Upload</button>
         <form onSubmit={this.onSubmit}>
           <input
             type="text"
@@ -84,7 +138,7 @@ export default class BlogForm extends React.Component {
             value={this.state.title}
             onChange={this.onTitleChange}
           />
-          <input type="file" onChange={this.fileSelectedHandler} />
+          
           <textarea
             placeholder="Blog Body"
             value={this.state.body}
