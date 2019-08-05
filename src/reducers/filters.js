@@ -9,6 +9,16 @@ const filterReducer = (state = filterReducerDefaultState, action) => {
         ...state,
         text: action.text
       };
+    case "SEARCH_BY_HEAD":
+      return {
+        ...state,
+        searchBy: "head"
+      };
+    case "SEARCH_BY_TITLE":
+      return {
+        ...state,
+        searchBy: "title"
+      };
     default:
       return state;
   }

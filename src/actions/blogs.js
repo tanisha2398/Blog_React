@@ -11,11 +11,12 @@ export const startAddBlog = (blogData = {}) => {
     const {
       title = "",
       body = "",
+      head = "",
       createdAt = new Date(),
       imgUrl = "",
       url = ""
     } = blogData;
-    const blog = { title, body, createdAt, imgUrl, url };
+    const blog = { title, body, head, createdAt, imgUrl, url };
     database
       .ref(`users/${uid}/blogs`)
       .push(blog)
