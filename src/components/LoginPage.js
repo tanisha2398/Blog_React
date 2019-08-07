@@ -6,8 +6,10 @@ export const LoginPage = ({ startLogin }) => {
     <div className="box-layout">
       <div className="box-layout__box">
         <h1 className="box-layout__title">Blogger</h1>
-        <p>Sometimes good things fall apart, so better things can fall together</p>
-        <button className="button" onClick={startLogin}>
+        <p>
+          Sometimes good things fall apart, so better things can fall together
+        </p>
+        <button className="button button--secondary" onClick={startLogin}>
           Login with Google
         </button>
       </div>

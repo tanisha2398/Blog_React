@@ -6,7 +6,7 @@ import { startEditBlog, startRemoveBlog } from "../actions/blogs";
 export const BlogEditPage = props => {
   console.log(props);
   return (
-    <div>
+    <div className="content-container">
       Blog Edit page content with id {props.match.params.id}
       <Link to={`/read/${props.match.params.id}`}>Read</Link>
       <BlogForm
@@ -16,7 +16,7 @@ export const BlogEditPage = props => {
           props.history.push("/dashboard");
         }}
       />
-      <div className="content-container">
+      <div>
         <button
           className="button"
           onClick={() => {

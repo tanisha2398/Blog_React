@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import BlogForm from "./BlogForm";
 import { startAddBlog } from "../actions/blogs";
 export const BlogAddPage = props => (
-  <div>
-    Add blog
+  <div className="content-container">
+    <h1>Add blog</h1>
     <BlogForm
       onSubmit={blog => {
         props.dispatch(startAddBlog(blog));

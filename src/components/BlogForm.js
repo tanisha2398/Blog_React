@@ -95,24 +95,27 @@ export default class BlogForm extends React.Component {
   };
   render() {
     return (
-      <div className="content-container">
+      <div>
         {this.state.error && <p className="form__error">{this.state.error}</p>}
-        <progress value={this.state.progress} max="100" />
+
         <br />
-        <input type="file" onChange={this.fileSelectedHandler} />
-        <button
-          className="button button--secondary"
-          onClick={this.handleUpload}
-        >
-          Upload
-        </button>
-        <br />
-        <img
-          src={this.state.url || "https://via.placeholder.com/100x100"}
-          alt="Uploaded image"
-          height="100"
-          width="100"
-        />
+        <div className="header__content">
+          <div>
+            <input type="file" onChange={this.fileSelectedHandler} />
+            <img
+              src={this.state.url || "https://via.placeholder.com/100x100"}
+              alt="Uploaded image"
+              height="100"
+              width="100"
+            />
+          </div>
+          <div>
+            <button className="button" onClick={this.handleUpload}>
+              Upload
+            </button>
+            <progress value={this.state.progress} max="100" />
+          </div>
+        </div>
         <form className="form" onSubmit={this.onSubmit}>
           <input
             className="text-input"

@@ -1,6 +1,8 @@
 .page-header {
-  background: $off-white;
-  padding: $l-size 0;
+  background: url("/images/sbg.jpg");
+  background-size: cover;
+  padding: $s-size 0;
+  height: 210px;
   margin-bottom: $l-size;
 }
 .page-header__title {
