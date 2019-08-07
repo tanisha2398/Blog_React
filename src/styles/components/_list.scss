@@ -34,6 +34,7 @@
 .list-item__sub-title {
   color: $grey;
   font-size: $font-size-small;
+  word-break: break-all;
 }
 
 .list-item__data {

@@ -5,11 +5,14 @@ import selectBlogs from "../selectors/blogs";
 
 const BlogSummary = ({ blogCount, hiddenBlog }) => {
   return (
-    <div>
-      <h1>
-        viewing {blogCount} hidden are {hiddenBlog - blogCount}
+    <div className="page-header">
+    <div className="content-container">
+      <h1 className="page-header__title">
+        You are viewing {blogCount} blog out of {hiddenBlog - blogCount} blogs
       </h1>
     </div>
+    </div>
+  
   );
 };
 

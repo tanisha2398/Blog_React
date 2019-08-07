@@ -14,7 +14,7 @@ export default class BlogForm extends React.Component {
     this.state = {
       title: props.blog ? props.blog.title : "",
       body: props.blog ? props.blog.body : "",
-      head: props.head ? props.blog.head : "",
+      head: props.blog ? props.blog.head : "",
       createdAt: props.blog ? moment(props.blog.createdAt) : moment(),
       imgUrl: props.blog ? props.blog.imgUrl : "",
       url: props.blog ? props.blog.url : "",
@@ -95,21 +95,27 @@ export default class BlogForm extends React.Component {
   };
   render() {
     return (
-      <div>
-        {this.state.error && <p>{this.state.error}</p>}
+      <div className="content-container">
+        {this.state.error && <p className="form__error">{this.state.error}</p>}
         <progress value={this.state.progress} max="100" />
         <br />
         <input type="file" onChange={this.fileSelectedHandler} />
-        <button onClick={this.handleUpload}>Upload</button>
+        <button
+          className="button button--secondary"
+          onClick={this.handleUpload}
+        >
+          Upload
+        </button>
         <br />
         <img
-          src={this.state.url || "https://via.placeholder.com/400x300"}
+          src={this.state.url || "https://via.placeholder.com/100x100"}
           alt="Uploaded image"
-          height="300"
-          width="400"
+          height="100"
+          width="100"
         />
-        <form onSubmit={this.onSubmit}>
+        <form className="form" onSubmit={this.onSubmit}>
           <input
+            className="text-input"
             type="text"
             placeholder="Title"
             autoFocus
@@ -117,6 +123,7 @@ export default class BlogForm extends React.Component {
             onChange={this.onTitleChange}
           />
           <input
+            className="text-input"
             type="text"
             placeholder="Head"
             autoFocus
@@ -125,12 +132,13 @@ export default class BlogForm extends React.Component {
           />
 
           <textarea
+            className="textarea"
             placeholder="Blog Body"
             value={this.state.body}
             onChange={this.onBodyChange}
           />
 
-          <button>Add Blog</button>
+          <button className="button">Add Blog</button>
         </form>
       </div>
     );

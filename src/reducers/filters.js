@@ -1,6 +1,6 @@
 const filterReducerDefaultState = {
   text: "",
-  sortBy: "title"
+  searchBy: "title"
 };
 const filterReducer = (state = filterReducerDefaultState, action) => {
   switch (action.type) {

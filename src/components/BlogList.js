@@ -5,7 +5,7 @@ import selectBlog from "../selectors/blogs";
 const BlogList = props => {
   console.log(props);
   return (
-    <div>
+    <div className="content-container">
       {props.blogs.length === 0 ? (
         <span>No Blogs</span>
       ) : (

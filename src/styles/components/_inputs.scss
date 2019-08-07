@@ -8,8 +8,13 @@
 
 .select {
   @extend .text-input;
+  background: $light-blue;
 }
 .textarea {
   @extend .text-input;
   height: 10rem;
+}
+.link {
+  text-decoration: none;
+  color: white;
 }

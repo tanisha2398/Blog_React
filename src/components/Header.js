@@ -9,15 +9,20 @@ export const Header = ({ startLogout }) => (
         <Link className="header__title" to="/dashboard">
           <h1>Blogger</h1>
         </Link>
-        <NavLink to="/dashboard" activeClassName="is-active" exact={true}>
+        <NavLink
+          className="link"
+          to="/dashboard"
+          activeClassName="is-active"
+          exact={true}
+        >
           Dashboard
         </NavLink>
-        <NavLink to="/create" activeClassName="is-active">
+        <NavLink className="link" to="/create" activeClassName="is-active">
           Add Blog
         </NavLink>
 
         <button className="button button--link" onClick={startLogout}>
-          Logout
+          <h3>Logout</h3>
         </button>
       </div>
     </div>

@@ -1,6 +1,6 @@
 .button {
-  background: $blue;
-  color: white;
+  background: $light-blue;
+  color: black;
   border: none;
   padding: $s-size;
   font-weight: 300;
@@ -11,7 +11,11 @@
 }
 .button--link {
   background: none;
+  color: white;
 }
 .button--secondary {
-  background: #888888;
+  background: $seablue;
+}
+.button--remove {
+  background: red;
 }

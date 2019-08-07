@@ -16,14 +16,17 @@ export const BlogEditPage = props => {
           props.history.push("/dashboard");
         }}
       />
-      <button
-        onClick={() => {
-          props.dispatch(startRemoveBlog({ id: props.blog.id }));
-          props.history.push("/dashboard");
-        }}
-      >
-        Remove
-      </button>
+      <div className="content-container">
+        <button
+          className="button"
+          onClick={() => {
+            props.dispatch(startRemoveBlog({ id: props.blog.id }));
+            props.history.push("/dashboard");
+          }}
+        >
+          Remove
+        </button>
+      </div>
     </div>
   );
 };

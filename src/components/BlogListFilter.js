@@ -2,8 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { setTextFilter, searchByTitle, searchByHead } from "../actions/filters";
 const BlogListFilter = props => (
-  <div>
+  <div className="content-container">
     <input
+      className="text-input"
       type="text"
       value={props.filters.text}
       onChange={e => {
