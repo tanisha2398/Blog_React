@@ -4,12 +4,20 @@
   padding: $s-size 0;
   height: 210px;
   margin-bottom: $l-size;
+  @media (min-width: $desktop-breakpoint) {
+    margin-right: $s-size;
+    margin: 0 $s-size 0 0;
+  }
 }
 .page-header__title {
   font-weight: 300;
   margin: 0;
+  color: white;
   span {
     font-weight: bold;
+  }
+  @media (min-width: $desktop-breakpoint) {
+    font-weight: 100;
   }
 }
 .page-header__actions {

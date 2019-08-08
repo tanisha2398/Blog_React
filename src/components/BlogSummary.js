@@ -7,13 +7,15 @@ const BlogSummary = ({ blogCount, hiddenBlog }) => {
   return (
     <div className="page-header">
       <div className="content-container">
-        <h1>
+        <h2 className="page-header__title">
           Never miss an article about web development, JavaScript and
           self-growth.
-        </h1>
-        <h1 className="page-header__title">
-          You are viewing {blogCount} blog out .Hidden blogs are {hiddenBlog - blogCount}.
-        </h1>
+        </h2>
+        <br />
+        <h4 className="page-header__title">
+          You are viewing <span>{blogCount}</span> blog out .Hidden blogs are{" "}
+          <span>{hiddenBlog - blogCount}</span>.
+        </h4>
       </div>
     </div>
   );
