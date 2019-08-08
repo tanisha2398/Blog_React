@@ -12,7 +12,7 @@ const BlogSummary = ({ blogCount, hiddenBlog }) => {
           self-growth.
         </h1>
         <h1 className="page-header__title">
-          You are viewing {blogCount} blog out of {hiddenBlog - blogCount} blogs
+          You are viewing {blogCount} blog out .Hidden blogs are {hiddenBlog - blogCount}.
         </h1>
       </div>
     </div>
